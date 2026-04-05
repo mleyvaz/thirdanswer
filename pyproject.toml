@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "thirdanswer"
-version = "0.1.0"
+version = "0.2.0"
 description = "The Third Answer — evaluate AI uncertainty with T,I,F (Truth, Indeterminacy, Falsity)"
 readme = "README.md"
 license = {text = "MIT"}

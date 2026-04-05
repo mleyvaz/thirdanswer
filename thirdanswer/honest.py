@@ -77,6 +77,32 @@ class HonestResponse:
     def is_paraconsistent(self) -> bool:
         return self.compass.is_paraconsistent
 
+    def label(self) -> str:
+        """Generate the Epistemic Nutrition Label for this response."""
+        bar_t = "\u2588" * int(self.T * 8) + "\u2591" * (8 - int(self.T * 8))
+        bar_i = "\u2588" * int(self.I * 8) + "\u2591" * (8 - int(self.I * 8))
+        bar_f = "\u2588" * int(self.F * 8) + "\u2591" * (8 - int(self.F * 8))
+        para = " PARACONSISTENT" if self.is_paraconsistent else ""
+        abstain = "\n  \u26a0 Recommend: ABSTAIN (I too high)" if self.compass.should_abstain else ""
+        unknown = f"\n  What I don't know: {self.what_i_dont_know}" if self.what_i_dont_know else ""
+        return (
+            f"\u250c{'─'*42}\u2510\n"
+            f"\u2502  EPISTEMIC NUTRITION LABEL{' '*15}\u2502\n"
+            f"\u2502{'═'*42}\u2502\n"
+            f"\u2502  Truth (T)          {bar_t} {self.T:.2f}\u2502\n"
+            f"\u2502  Indeterminacy (I)  {bar_i} {self.I:.2f}\u2502\n"
+            f"\u2502  Falsity (F)        {bar_f} {self.F:.2f}\u2502\n"
+            f"\u2502{'─'*42}\u2502\n"
+            f"\u2502  Zone: {self.zone_emoji} {self.zone_name:.<28s}\u2502\n"
+            f"\u2502  Action: {self.compass.zone_action[:32]:.<32s}\u2502\n"
+            f"\u2502  Confidence: {self.confidence:.2f}{para:.<27s}\u2502\n"
+            f"\u2502  Recommendation: {self.recommendation:.<24s}\u2502\n"
+            f"\u2502{'─'*42}\u2502\n"
+            f"\u2502  Powered by thirdanswer{' '*18}\u2502\n"
+            f"\u2514{'─'*42}\u2518"
+            f"{unknown}{abstain}"
+        )
+
     def __repr__(self) -> str:
         preview = self.answer[:80] + "..." if len(self.answer) > 80 else self.answer
         return (

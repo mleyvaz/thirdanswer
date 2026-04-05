@@ -16,7 +16,7 @@ With LLM (Groq, free):
 Book: "The Third Answer" by Leyva-Vazquez & Smarandache (2026)
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Maikel Yelandi Leyva-Vazquez"
 
 from .compass import Compass

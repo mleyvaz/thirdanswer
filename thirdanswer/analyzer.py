@@ -113,6 +113,31 @@ class AnalysisResult:
     def has_errors(self) -> bool:
         return len(self.error_types) > 0
 
+    def label(self) -> str:
+        """Generate the Epistemic Nutrition Label for this analysis."""
+        bar_t = "\u2588" * int(self.T * 8) + "\u2591" * (8 - int(self.T * 8))
+        bar_i = "\u2588" * int(self.I * 8) + "\u2591" * (8 - int(self.I * 8))
+        bar_f = "\u2588" * int(self.F * 8) + "\u2591" * (8 - int(self.F * 8))
+        para = " PARACONSISTENT" if self.is_paraconsistent else ""
+        errs = f"\n  Errors: {', '.join(self.error_types)}" if self.has_errors else ""
+        return (
+            f"\u250c{'─'*42}\u2510\n"
+            f"\u2502  EPISTEMIC NUTRITION LABEL{' '*15}\u2502\n"
+            f"\u2502{'═'*42}\u2502\n"
+            f"\u2502  Truth (T)          {bar_t} {self.T:.2f}\u2502\n"
+            f"\u2502  Indeterminacy (I)  {bar_i} {self.I:.2f}\u2502\n"
+            f"\u2502  Falsity (F)        {bar_f} {self.F:.2f}\u2502\n"
+            f"\u2502{'─'*42}\u2502\n"
+            f"\u2502  Zone: {self.zone_emoji} {self.zone_name:.<28s}\u2502\n"
+            f"\u2502  Action: {self.compass.zone_action[:32]:.<32s}\u2502\n"
+            f"\u2502  Confidence: {self.confidence:.2f}{para:.<27s}\u2502\n"
+            f"\u2502  Recommendation: {self.recommendation:.<24s}\u2502\n"
+            f"\u2502{'─'*42}\u2502\n"
+            f"\u2502  Powered by thirdanswer{' '*18}\u2502\n"
+            f"\u2514{'─'*42}\u2518"
+            f"{errs}"
+        )
+
     def __repr__(self) -> str:
         errs = f" ERRORS: {self.error_types}" if self.has_errors else ""
         return (
