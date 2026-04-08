@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "thirdanswer"
-version = "0.2.0"
-description = "The Third Answer — evaluate AI uncertainty with T,I,F (Truth, Indeterminacy, Falsity)"
+version = "0.3.0"
+description = "Neutrosophic logic toolkit — evaluate AI uncertainty and perform statistics beyond classical limits using T,I,F (Truth, Indeterminacy, Falsity)"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.9"
@@ -16,7 +16,8 @@ authors = [
 keywords = [
     "AI", "uncertainty", "neutrosophic", "hallucination", "LLM",
     "truth", "indeterminacy", "falsity", "paraconsistency",
-    "epistemic", "confidence", "evaluation",
+    "epistemic", "confidence", "evaluation", "statistics",
+    "interval-statistics", "neutrosophic-statistics", "smarandache",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
